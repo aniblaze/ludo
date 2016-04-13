@@ -1,0 +1,5 @@
+chance_lottery:
+    resource: "@ChanceLotteryBundle/Resources/config/routing.yml"
+    prefix:   /
+
+

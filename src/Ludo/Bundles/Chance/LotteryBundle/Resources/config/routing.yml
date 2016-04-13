@@ -1,0 +1,17 @@
+lottery:
+    type:     rest
+    resource: Ludo\Bundles\Chance\LotteryBundle\Controller\DefaultController
+
+eurojackpot_results:
+    path:       /eurojackpot/results
+    defaults:   { _controller: ChanceLotteryBundle:Default:euroJackpotResults, _format: json }
+    methods:    [GET]
+
+eurojackpot_result_year:
+    path:       /eurojackpot/results/{year}
+    defaults:   { _controller: ChanceLotteryBundle:Default:euroJackpotResultsPerYear, _format: json }
+    methods:    [GET]
+eurojackpot_prediction:
+    path:       /eurojackpot/prediction
+    defaults:   { _controller: ChanceLotteryBundle:Default:euroJackpotPrediction, _format: json }
+    methods:    [GET]

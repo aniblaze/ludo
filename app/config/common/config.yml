@@ -1,0 +1,104 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+
+framework:
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/%kernel.environment%/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # handler_id set to null will use default session handler from php.ini
+        handler_id:  ~
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver:   pdo_mysql
+                host:     "%database_host%"
+                port:     "%database_port%"
+                dbname:   "%database_name%"
+                user:     "%database_user%"
+                password: "%database_password%"
+                charset:  UTF8
+        types:
+            customdate:  Ludo\Framework\Doctrine\Type\CustomDateType
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        default_entity_manager: default
+        entity_managers:
+            default:
+                connection: default
+                mappings:
+                    ChanceLotteryBundle:
+                        type: yml
+                        dir: Resources/config/doctrine
+                        prefix: Ludo\Domain\Chance
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+# FOS REST Configuration
+fos_rest:
+    param_fetcher_listener: true
+    body_listener: true
+    format_listener: true
+    view:
+        view_response_listener: 'force'
+    routing_loader:
+        default_format: json
+        include_format: false
+    exception:
+        codes: # Constants are located at FOS\RestBundle\Util\Codes
+            'Symfony\Component\Routing\Exception\ResourceNotFoundException': HTTP_NOT_FOUND
+            'Symfony\Component\Validator\Exception\ValidatorException': HTTP_BAD_REQUEST
+            'Doctrine\ORM\OptimisticLockException': HTTP_CONFLICT
+            'DomainException': HTTP_EXPECTATION_FAILED
+
+# JMS Serializer Configuration
+jms_serializer:
+    metadata:
+        directories:
+            lottery-bundle:
+                namespace_prefix: "Ludo\\Domain\\Chance\\DTO"
+                path: "@ChanceLotteryBundle/Resources/config/serializer"
+
+# Sensio Framework Extra Configuration
+sensio_framework_extra:
+    view:
+        annotations: false
+    router:
+        annotations: true

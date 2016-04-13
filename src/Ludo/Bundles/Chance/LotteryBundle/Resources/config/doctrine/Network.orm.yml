@@ -1,0 +1,24 @@
+Ludo\Domain\Chance\Network:
+  type: entity
+  table: network
+  repositoryClass: Ludo\Domain\Chance\NetworkRepository
+  id:
+    parent:
+      associationKey: true
+    child:
+      associationKey: true
+    date:
+      type: customdate
+  manyToOne:
+    parent:
+      targetEntity: Ludo\Domain\Chance\Particle
+      inversedBy: network
+      joinColumn:
+        parent_id:
+          referencedColumnName: id
+    child:
+      targetEntity: Ludo\Domain\Chance\Particle
+      inversedBy: network
+      joinColumn:
+        parent_id:
+          referencedColumnName: id

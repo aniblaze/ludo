@@ -1,0 +1,53 @@
+Ludo\Domain\Chance\Distributor:
+  type: entity
+  table: distributor
+  repositoryClass: Ludo\Domain\Chance\DistributorRepository
+  fields:
+    id:
+      type: integer
+      id: true
+      nullable: false
+      generator:
+        strategy: AUTO
+    name:
+      type: string
+      scale: 0
+      length: 50
+      unique: true
+      nullable: false
+      precision: 0
+      column: distributor_name
+    code:
+      type: string
+      scale: 0
+      length: 50
+      unique: true
+      nullable: false
+      precision: 0
+      column: distributor_code
+    created:
+      type: datetime
+      scale: 0
+      length: null
+      unique: false
+      nullable: false
+      precision: 0
+      column: created
+      gedmo:
+        timestampable:
+          on: create
+    updated:
+      type: datetime
+      scale: 0
+      length: null
+      unique: false
+      nullable: false
+      precision: 0
+      column: updated
+      gedmo:
+        timestampable:
+          on: create
+  oneToMany:
+    particles:
+      targetEntity: Ludo\Domain\Chance\Particle
+      mappedBy: distributor

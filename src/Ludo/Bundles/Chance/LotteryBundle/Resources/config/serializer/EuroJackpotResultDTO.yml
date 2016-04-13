@@ -1,0 +1,12 @@
+Ludo\Domain\Chance\DTO\EuroJackpotResultDTO:
+  exclusion_policy: ALL
+  properties:
+    timestamp:
+      type: integer
+      expose: true
+    numbers:
+      type: array<integer>
+      expose: true
+    euroNumbers:
+      type: array<integer>
+      expose: true

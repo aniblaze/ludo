@@ -1,0 +1,9 @@
+Ludo\Domain\Chance\DTO\LotteryResultDTO:
+  exclusion_policy: ALL
+  properties:
+    timestamp:
+      type: integer
+      expose: true
+    numbers:
+      type: array<integer>
+      expose: true
