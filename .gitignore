@@ -1,0 +1,7 @@
+.idea
+.bundle
+.vagrant
+vendor/*
+var/cache
+var/logs
+var/sessions
