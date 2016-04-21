@@ -10,6 +10,7 @@ the stored data for a given lottery.
 3. add '192.168.56.204 ludo.dev' to your hosts file on the local machine.
 4. vagrant up
 5. vagrant ssh, and perform the following steps:
+ * cd /var/www/project
  * composer install
  * php bin/console doctrine:schema:create
  * php bin/console doctrine:fixtures:load
